@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formation ESP32 à Marrakech - Natech Formation</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #0e4165;
+      --secondary-color: #f44336;
+      --light-color: #f5f7fa;
+      --dark-color: #2c3e50;
+      --accent-color: #00b0ff;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-color);
+      color: var(--dark-color);
+    }
+
+    .banner {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+      color: white;
+      padding: 50px 0;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .banner h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .banner p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .date-badge {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .info-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .info-card h3 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .info-card i {
+      color: var(--accent-color);
+      margin-right: 10px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .feature-icon {
+      background-color: var(--primary-color);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .price-box {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #1a6ca8 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .price-value {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 15px 0;
+    }
+
+    .price-details {
+      margin-top: 20px;
+    }
+
+    .price-details ul {
+      list-style-type: none;
+      padding-left: 0;
+      text-align: left;
+    }
+
+    .price-details li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .price-details li:last-child {
+      border-bottom: none;
+    }
+
+    .price-details i {
+      margin-right: 10px;
+      color: #7fdbff;
+    }
+
+    .btn-register {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      border: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-register:hover {
+      background-color: #d32f2f;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .agenda-item {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .agenda-item:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+    }
+
+    .agenda-item:after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 17px;
+      width: 2px;
+      height: calc(100% + 10px);
+      background-color: var(--accent-color);
+    }
+
+    .agenda-item:last-child:after {
+      display: none;
+    }
+
+    .agenda-time {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+
+    .registration-form {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    .registration-form h3 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-header {
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .admin-panel {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 25px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .admin-panel h3 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 40px 0;
+      margin-top: 50px;
+    }
+
+    .footer-info a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-info a:hover {
+      text-decoration: underline;
+      color: #7fdbff;
+    }
+
+    .footer-contact i {
+      margin-right: 10px;
+      color: #7fdbff;
+    }
+
+    .footer-social a {
+      display: inline-block;
+      margin-right: 15px;
+      color: white;
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      transform: translateY(-3px);
+      color: #7fdbff;
+    }
+
+    #confirmation {
+      display: none;
+    }
+
+    #adminSection {
+      display: none;
+    }
+
+    .stats-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .stats-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    .confirmed { color: #28a745; }
+    .pending { color: #ffc107; }
+    .waitlist { color: #17a2b8; }
+    .total { color: var(--primary-color); }
+
+    .participant-table {
+      margin-top: 20px;
+    }
+
+    .table-responsive {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .btn-export {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .action-buttons .btn {
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+
+    .action-buttons .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .banner h1 {
+        font-size: 2rem;
+      }
+      .price-value {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Banner Section -->
+  <div class="banner">
+    <div class="container">
+      <div class="date-badge">
+        6-8 Juin 2025
+      </div>
+      <h1>FORMATION ESP32</h1>
+      <p class="mb-4">Weekend Immersif IoT & Microcontrôleurs</p>
+      <a href="#inscription" class="btn btn-register">RÉSERVER MA PLACE</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <!-- Left Column - Information -->
+      <div class="col-lg-8">
+        <!-- Overview Card -->
+        <div class="info-card">
+          <h3><i class="fas fa-info-circle"></i> À propos de la formation</h3>
+          <p>Plongez dans l'univers fascinant de l'ESP32, le microcontrôleur qui révolutionne l'Internet des Objets ! Notre formation intensive de 3 jours à Marrakech vous permettra de maîtriser cette technologie et de développer vos propres projets connectés.</p>
+          <p>Que vous soyez débutant ou que vous ayez déjà une expérience en programmation, notre approche pratique vous guidera à travers toutes les étapes nécessaires pour créer des applications IoT innovantes.</p>
+          
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div>
+                  <strong>Groupe limité</strong>
+                  <p class="mb-0">12 participants maximum</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                  <strong>Formation certifiante</strong>
+                  <p class="mb-0">Certificat délivré</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-laptop-code"></i>
+                </div>
+                <div>
+                  <strong>Kit ESP32 inclus</strong>
+                  <p class="mb-0">À conserver après la formation</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <i class="fas fa-plane"></i>
+                </div>
+                <div>
+                  <strong>Voyage tout compris</strong>
+                  <p class="mb-0">Vols et hébergement inclus</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Program Card -->
+        <div class="info-card">
+          <h3><i class="fas fa-calendar-alt"></i> Programme détaillé</h3>
+          
+          <h5 class="mt-4">VENDREDI - Soirée d'introduction</h5>
+          <div class="agenda-item">
+            <div class="agenda-time">18h00 - 21h00</div>
+            <div class="agenda-content">
+              <strong>Introduction à l'ESP32</strong>
+              <ul>
+                <li>Présentation des participants et des objectifs</li>
+                <li>Introduction à l'IoT et aux microcontrôleurs</li>
+                <li>L'écosystème ESP32 : caractéristiques et applications</li>
+                <li>Présentation du matériel utilisé pendant la formation</li>
+                <li>Configuration de l'environnement de développement</li>
+              </ul>
+            </div>
+          </div>
+
+          <h5 class="mt-4">SAMEDI - Journée complète</h5>
+          <div class="agenda-item">
+            <div class="agenda-time">9h00 - 12h30</div>
+            <div class="agenda-content">
+              <strong>Fondamentaux et programmation de l'ESP32</strong>
+              <ul>
+                <li>Architecture du microcontrôleur ESP32</li>
+                <li>Installation des outils de développement (Arduino IDE, VS Code avec PlatformIO)</li>
+                <li>Programmation de base avec le framework Arduino</li>
+                <li>Gestion des entrées/sorties digitales et analogiques</li>
+                <li>Travaux pratiques : premiers programmes avec LED, capteurs et actionneurs</li>
+              </ul>
+            </div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">14h00 - 18h30</div>
+            <div class="agenda-content">
+              <strong>Communication et connectivité</strong>
+              <ul>
+                <li>Configuration et utilisation du WiFi intégré</li>
+                <li>Utilisation du Bluetooth LE</li>
+                <li>Communication avec les protocoles standards (I2C, SPI, UART)</li>
+                <li>Création d'un serveur web embarqué</li>
+                <li>Travaux pratiques : développement d'une application connectée simple</li>
+              </ul>
+            </div>
+          </div>
+
+          <h5 class="mt-4">DIMANCHE - Développement avancé</h5>
+          <div class="agenda-item">
+            <div class="agenda-time">9h00 - 12h30</div>
+            <div class="agenda-content">
+              <strong>Développement avancé</strong>
+              <ul>
+                <li>Gestion de l'énergie et modes de veille</li>
+                <li>Utilisation du multitâche avec FreeRTOS</li>
+                <li>Stockage de données (mémoire flash, SPIFFS)</li>
+                <li>Mise à jour OTA (Over The Air)</li>
+                <li>Travaux pratiques : développement d'un projet IoT complet</li>
+              </ul>
+            </div>
+          </div>
+          <div class="agenda-item">
+            <div class="agenda-time">14h00 - 17h00</div>
+            <div class="agenda-content">
+              <strong>Projet final et conclusion</strong>
+              <ul>
+                <li>Finalisation du projet</li>
+                <li>Présentation des projets par les participants</li>
+                <li>Bonnes pratiques et conseils pour vos futurs projets</li>
+                <li>Ressources complémentaires et communautés</li>
+                <li>Questions/réponses et conclusion de la formation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Price & Registration -->
+      <div class="col-lg-4">
+        <!-- Price Box -->
+        <div class="price-box">
+          <h4>TARIF FORMATION</h4>
+          <div class="price-value">1 740 €</div>
+          <p class="mb-0">par personne, tout compris</p>
+          
+          <div class="price-details">
+            <ul>
+              <li><i class="fas fa-check-circle"></i> Formation complète (17 heures)</li>
+              <li><i class="fas fa-check-circle"></i> Vol A/R Paris-Marrakech</li>
+              <li><i class="fas fa-check-circle"></i> 2 nuits en hôtel 4* (chambre individuelle)</li>
+              <li><i class="fas fa-check-circle"></i> Tous les repas inclus</li>
+              <li><i class="fas fa-check-circle"></i> Kit de développement ESP32</li>
+              <li><i class="fas fa-check-circle"></i> Transferts aéroport-hôtel</li>
+              <li><i class="fas fa-check-circle"></i> Certificat de formation</li>
+            </ul>
+          </div>
+          
+          <a href="#inscription" class="btn btn-register w-100">RÉSERVER MA PLACE</a>
+        </div>
+
+        <!-- Location Card -->
+        <div class="info-card mt-4">
+          <h3><i class="fas fa-map-marker-alt"></i> Lieu</h3>
+          <p class="mb-2"><strong>Marrakech, Maroc</strong></p>
+          <p>Formation dispensée dans un cadre exceptionnel, idéal pour concilier apprentissage et découverte. L'hôtel 4 étoiles qui vous accueillera dispose de toutes les commodités nécessaires pour un séjour agréable.</p>
+          <p>Les transferts entre l'aéroport et l'hôtel sont inclus dans le prix.</p>
+          <img src="/api/placeholder/400/200" alt="Marrakech" class="img-fluid rounded mt-3">
+        </div>
+      </div>
+    </div>
+
+    <!-- Registration Form Section -->
+    <div class="row mt-5" id="inscription">
+      <div class="col-lg-12">
+        <div class="registration-form">
+          <h3><i class="fas fa-edit"></i> Formulaire d'inscription</h3>
+          
+          <!-- Registration Form -->
+          <form id="registrationForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nom" class="form-label">Nom*</label>
+                <input type="text" class="form-control" id="nom" name="nom" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="prenom" class="form-label">Prénom*</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" required>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="email" class="form-label">Email*</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="telephone" class="form-label">Téléphone*</label>
+                <input type="tel" class="form-control" id="telephone" name="telephone" required>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="societe" class="form-label">Société/Organisation</label>
+                <input type="text" class="form-control" id="societe" name="societe">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="experience" class="form-label">Expérience en programmation*</label>
+                <select class="form-select" id="experience" name="experience" required>
+                  <option value="">Sélectionnez votre niveau</option>
+                  <option value="débutant">Débutant</option>
+                  <option value="intermédiaire">Intermédiaire</option>
+                  <option value="avancé">Avancé</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="message" class="form-label">Commentaires ou questions</label>
+              <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+            </div>
+            
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="conditions" name="conditions" required>
+              <label class="form-check-label" for="conditions">J'accepte les conditions générales et la politique de confidentialité*</label>
+            </div>
+            
+            <button type="submit" class="btn btn-register">CONFIRMER MON INSCRIPTION</button>
+          </form>
+          
+          <!-- Confirmation Message (Hidden by Default) -->
+          <div id="confirmation" class="text-center py-5">
+            <i class="fas fa-check-circle text-success display-1 mb-4"></i>
+            <h3>Inscription enregistrée avec succès !</h3>
+            <p class="mb-4">Merci pour votre inscription à notre formation ESP32 à Marrakech. Nous avons bien reçu votre demande et vous contacterons sous 48h pour confirmer votre participation et les modalités de paiement.</p>
+            <a href="#" class="btn btn-primary" id="returnButton">Retour à l'accueil</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Section (Hidden by Default) -->
+    <div id="adminSection">
+      <div class="admin-panel">
+        <h3><i class="fas fa-user-shield"></i> Espace Administration</h3>
+        
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <div class="stats-card">
+              <h5>Inscrits confirmés</h5>
+              <div class="stats-number confirmed" id="confirmedCount">0</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stats-card">
+              <h5>En attente</h5>
+              <div class="stats-number pending" id="pendingCount">0</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stats-card">
+              <h5>Liste d'attente</h5>
+              <div class="stats-number waitlist" id="waitlistCount">0</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stats-card">
+              <h5>Places disponibles</h5>
+              <div class="stats-number total" id="availableCount">12</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0">Liste des participants</h5>
+          <button class="btn btn-export btn-sm" id="exportButton">
+            <i class="fas fa-file-export"></i> Exporter CSV
+          </button>
+        </div>
+        
+        <div class="table-responsive">
+          <table class="table table-striped table-hover participant-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Statut</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="participantTableBody">
+              <!-- Participants will be added here dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5>Natech Formation</h5>
+          <p class="footer-info">
+            123 Avenue de l'Innovation<br>
+            75001 Paris, France<br>
+            <a href="https://natech-formation.fr">www.natech-formation.fr</a>
+          </p>
+        </div>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5>Contact</h5>
+          <p class="footer-contact">
+            <i class="fas fa-envelope"></i> <a href="mailto:nada.electronics@gmail.com">nada.electronics@gmail.com</a><br>
+            <i class="fas fa-phone"></i> +33 1 23 45 67 89
+          </p>
+        </div>
+        <div class="col-md-4">
+          <h5>Suivez-nous</h5>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12 text-center">
+          <p class="mb-0">© 2025 Natech Formation - Tous droits réservés</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Participant Details Modal -->
+  <div class="modal fade" id="participantModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Détails du participant</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Informations personnelles</h6>
+              <table class="table table-sm">
+                <tr>
+                  <th>Nom complet:</th>
+                  <td id="modalParticipantName"></td>
+                </tr>
+                <tr>
+                  <th>Email:</th>
+                  <td id="modalParticipantEmail"></td>
+                </tr>
+                <tr>
+                  <th>Téléphone:</th>
+                  <td id="modalParticipantPhone"></td>
+                </tr>
+                <tr>
+                  <th>Société:</th>
+                  <td id="modalParticipantCompany"></td>
+                </tr>
+                <tr>
+                  <th>Expérience:</th>
+                  <td id="modalParticipantExperience"></td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <h6>Détails de l'inscription</h6>
+              <table class="table table-sm">
+                <tr>
+                  <th>Date d'inscription:</th>
+                  <td id="modalRegistrationDate"></td>
+                </tr>
+                <tr>
+                  <th>Statut:</th>
+                  <td id="modalRegistrationStatus"></td>
+                </tr>
+                <tr>
+                  <th>Commentaires:</th>
+                  <td id="modalParticipantComments"></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <h6>Actions</h6>
+              <div class="d-flex flex-wrap">
+                <button class="btn btn-success btn-sm me-2 mb-2" data-action="confirm">Confirmer</button>
+                <button class="btn btn-warning btn-sm me-2 mb-2" data-action="pending">En attente</button>
+                <button class="btn btn-info btn-sm me-2 mb-2" data-action="waitlist">Liste d'attente</button>
+                <button class="btn btn-danger btn-sm me-2 mb-2" data-action="cancel">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Local Storage Database
+    class LocalDB {
+      constructor() {
+        this.DB_KEY = 'natechFormationDB';
+        this.initDatabase();
+      }
+      
+      initDatabase() {
+        if (!localStorage.getItem(this.DB_KEY)) {
+          const initialData = {
+            participants: [],
+            settings: {
+              maxParticipants: 12,
+              formationId: 'ESP32-MRK-2025-06',
+              form
